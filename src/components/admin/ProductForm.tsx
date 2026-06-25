@@ -19,6 +19,7 @@ type FormState = {
   unitLabel: string;
   minOrder: string;
   image: string;
+  detailImages: string; // 줄바꿈으로 구분된 URL들
   badges: string;
   soldOut: boolean;
   description: string;
@@ -37,6 +38,7 @@ function toForm(p?: Product): FormState {
     unitLabel: p?.unitLabel ?? "낱개",
     minOrder: p ? String(p.minOrder) : "1",
     image: p?.image ?? "",
+    detailImages: p?.detailImages?.join("\n") ?? "",
     badges: p?.badges?.join(", ") ?? "",
     soldOut: p?.soldOut ?? false,
     description: p?.description ?? "",
@@ -82,6 +84,11 @@ export default function ProductForm({ product }: { product?: Product }) {
       f.image.trim() ||
       placeholderImage(f.category, f.name.trim(), f.brand.trim());
 
+    const detailImages = f.detailImages
+      .split("\n")
+      .map((s) => s.trim())
+      .filter(Boolean);
+
     const data: Omit<Product, "id"> = {
       code: f.code.trim() || autoCode(f.category),
       name: f.name.trim(),
@@ -89,6 +96,7 @@ export default function ProductForm({ product }: { product?: Product }) {
       category: f.category,
       sub: f.sub.trim() || (category?.subs[0] ?? ""),
       image,
+      detailImages: detailImages.length ? detailImages : undefined,
       price,
       listPrice,
       unitCount,
@@ -188,6 +196,16 @@ export default function ProductForm({ product }: { product?: Product }) {
         <div className="mt-3">
           <Field label="상세 설명">
             <textarea className={`${inp} h-24 resize-none`} value={f.description} onChange={(e) => set("description", e.target.value)} placeholder="상품 상세 설명" />
+          </Field>
+        </div>
+        <div className="mt-3">
+          <Field label="상세 이미지" hint="한 줄에 URL 하나씩 (상세정보 탭에 세로로 노출)">
+            <textarea
+              className={`${inp} h-24 resize-none`}
+              value={f.detailImages}
+              onChange={(e) => set("detailImages", e.target.value)}
+              placeholder={"https://example.com/detail-1.jpg\nhttps://example.com/detail-2.jpg"}
+            />
           </Field>
         </div>
       </Section>

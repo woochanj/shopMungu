@@ -22,6 +22,8 @@ export interface Product {
   category: CategoryId;
   sub: string; // 소분류
   image: string;
+  /** 상세정보 이미지 URL 목록 (세로로 노출). 상용 전환 시 업로드 결과 URL도 그대로 들어감 */
+  detailImages?: string[];
   /** 판매가 (1 판매단위 기준, 원) */
   price: number;
   /** 정가 (할인 전). price와 같으면 할인 없음 */

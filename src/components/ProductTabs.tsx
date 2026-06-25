@@ -81,6 +81,24 @@ function DetailTab({ product }: { product: Product }) {
           {product.description}
         </p>
       )}
+
+      {/* 상세 이미지 (관리자가 등록한 URL들) */}
+      {product.detailImages && product.detailImages.length > 0 && (
+        <div className="mb-8 space-y-3">
+          {product.detailImages.map((src, i) => (
+            // 외부 임의 URL이므로 next/image 대신 일반 img 사용
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={i}
+              src={src}
+              alt={`${product.name} 상세 이미지 ${i + 1}`}
+              loading="lazy"
+              className="w-full rounded-2xl"
+            />
+          ))}
+        </div>
+      )}
+
       <table className="w-full overflow-hidden rounded-2xl text-sm">
         <tbody>
           {rows.map(([label, value], i) => (
