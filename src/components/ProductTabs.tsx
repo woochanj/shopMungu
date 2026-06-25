@@ -25,15 +25,15 @@ export default function ProductTabs({ product }: { product: Product }) {
 
   return (
     <div className="mt-16">
-      {/* tab headers */}
-      <div className="flex border-b border-line">
+      {/* tab headers — 스크롤 시 헤더 아래 고정 (스마트스토어 방식) */}
+      <div className="sticky top-[150px] z-30 flex border-b border-line bg-white/95 backdrop-blur">
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setTab(t.key)}
-            className={`relative -mb-px px-5 py-3 text-sm font-bold transition-colors ${
+            className={`relative -mb-px px-5 py-3 text-sm font-bold transition-all duration-200 ${
               tab === t.key
-                ? "border-b-2 border-toss-blue text-toss-blue"
+                ? "text-toss-blue"
                 : "text-ink-400 hover:text-ink-700"
             }`}
           >
@@ -41,11 +41,18 @@ export default function ProductTabs({ product }: { product: Product }) {
             {typeof t.count === "number" && (
               <span className="tnum ml-1 text-xs text-ink-300">{t.count}</span>
             )}
+            {/* 밑줄 인디케이터 (부드럽게) */}
+            <span
+              className={`absolute inset-x-0 -bottom-px h-0.5 origin-center bg-toss-blue transition-transform duration-300 ${
+                tab === t.key ? "scale-x-100" : "scale-x-0"
+              }`}
+            />
           </button>
         ))}
       </div>
 
-      <div className="pt-8">
+      {/* 탭 전환마다 key 변경 → 페이드인 재생 */}
+      <div key={tab} className="fade-in-up pt-8">
         {tab === "detail" && <DetailTab product={product} />}
         {tab === "review" && <ReviewTab product={product} />}
         {tab === "qna" && <QnaTab product={product} />}

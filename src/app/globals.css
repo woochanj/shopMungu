@@ -78,6 +78,27 @@ body {
   overflow: hidden;
 }
 
+/* 부드러운 페이드인 (탭 전환, 스크롤 진입 등) */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in-up {
+  animation: fadeInUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* 부드러운 부드러운 전역 전환 톤 (버튼·링크 등 기본 hover) */
+a,
+button {
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;

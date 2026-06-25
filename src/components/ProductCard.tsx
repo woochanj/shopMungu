@@ -15,7 +15,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="group relative flex h-full flex-col">
       <Link href={`/product/${product.id}`} className="block">
-        <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-hover">
+        <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 group-hover:shadow-hover">
           <Image
             src={product.image}
             alt={product.name}
