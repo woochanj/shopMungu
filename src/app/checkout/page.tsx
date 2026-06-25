@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useCart } from "@/lib/cart-context";
 import { formatWon } from "@/lib/products";
 import { buildOrderSummary } from "@/lib/order";
+import { orderRepo } from "@/lib/order-repository";
 import {
   PAYMENT_METHODS,
   type PaymentProvider,
@@ -74,6 +75,20 @@ export default function CheckoutPage() {
         provider,
       });
       if (result.success) {
+        orderRepo.create({
+          id: result.orderId,
+          createdAt: result.paidAt,
+          status: "paid",
+          provider: result.provider,
+          customerName: name.trim(),
+          phone: phone.trim(),
+          address: address.trim(),
+          memo: memo.trim() || undefined,
+          lines: summary.lines,
+          subtotal: summary.subtotal,
+          shipping: summary.shipping,
+          total: summary.total,
+        });
         clear();
         router.push(
           `/checkout/complete?orderId=${result.orderId}&provider=${result.provider}`
