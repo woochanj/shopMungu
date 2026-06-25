@@ -68,7 +68,7 @@ function DetailTab({ product }: { product: Product }) {
   rows.push(["판매가", formatWon(product.price)]);
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       {product.description && (
         <p className="mb-6 text-sm leading-relaxed text-ink-600">
           {product.description}
@@ -128,7 +128,7 @@ function ReviewTab({ product }: { product: Product }) {
   }
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       {/* summary */}
       <div className="mb-8 flex items-center gap-4 rounded-2xl bg-surface p-6">
         <div className="text-center">
@@ -254,7 +254,7 @@ function QnaTab({ product }: { product: Product }) {
   }
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       <form onSubmit={submit} className="mb-8 rounded-2xl bg-surface p-5">
         <p className="mb-3 text-sm font-bold text-ink-900">상품 문의</p>
         <input

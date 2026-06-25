@@ -58,22 +58,29 @@ export default function ProductDetailPage({
         <span className="font-medium text-ink-700">{product.sub}</span>
       </nav>
 
-      <div className="mt-5 grid gap-8 lg:grid-cols-2">
-        {/* image */}
-        <div className="relative aspect-square overflow-hidden rounded-card bg-surface">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            unoptimized
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover"
-            priority
-          />
+      {/* 본문: 좌측(이미지+탭) / 우측(스티키 구매박스) */}
+      <div className="mt-5 grid gap-10 lg:grid-cols-[minmax(0,1fr)_380px]">
+        {/* 좌측 컬럼 */}
+        <div className="min-w-0">
+          {/* image */}
+          <div className="relative aspect-square overflow-hidden rounded-2xl bg-surface">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              unoptimized
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+
+          {/* 상세정보 / 리뷰 / Q&A 탭 */}
+          <ProductTabs product={product} />
         </div>
 
-        {/* info */}
-        <div className="flex flex-col">
+        {/* 우측: 스티키 구매 정보 */}
+        <div className="lg:sticky lg:top-44 lg:self-start">
           <span className="text-sm font-semibold text-toss-blue">
             {product.brand}
           </span>
@@ -81,7 +88,7 @@ export default function ProductDetailPage({
             {product.name}
           </h1>
 
-          <div className="mt-2 flex items-center gap-2 text-sm text-ink-400">
+          <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-ink-400">
             <span className="tnum font-medium text-ink-500">
               ★ {product.rating.toFixed(1)}
             </span>
@@ -112,9 +119,6 @@ export default function ProductDetailPage({
           </div>
         </div>
       </div>
-
-      {/* 상세정보 / 리뷰 / Q&A 탭 */}
-      <ProductTabs product={product} />
 
       {/* related */}
       {related.length > 0 && (
