@@ -8,6 +8,7 @@ import { categoryById } from "@/lib/categories";
 import { discountRate, formatWon } from "@/lib/products";
 import ProductPurchase from "@/components/ProductPurchase";
 import ProductGrid from "@/components/ProductGrid";
+import ProductTabs from "@/components/ProductTabs";
 import { useProduct, useProducts } from "@/lib/use-products";
 
 export default function ProductDetailPage({
@@ -109,17 +110,16 @@ export default function ProductDetailPage({
           <div className="mt-6">
             <ProductPurchase product={product} />
           </div>
-
-          <div className="mt-5 rounded-card bg-surface p-4 text-sm leading-relaxed text-ink-500">
-            {product.description}
-          </div>
         </div>
       </div>
+
+      {/* 상세정보 / 리뷰 / Q&A 탭 */}
+      <ProductTabs product={product} />
 
       {/* related */}
       {related.length > 0 && (
         <section className="mt-16">
-          <h2 className="mb-5 text-xl font-extrabold text-ink-900">
+          <h2 className="mb-6 text-2xl font-extrabold tracking-tight text-ink-900">
             함께 보면 좋은 상품
           </h2>
           <ProductGrid products={related} />
