@@ -80,7 +80,7 @@ export default function AdminLayout({
             </Link>
           ))}
         </div>
-        <main className="p-5 md:p-8">{children}</main>
+        <main className="mx-auto w-full max-w-5xl p-5 md:p-8">{children}</main>
       </div>
     </div>
   );

@@ -52,7 +52,7 @@ export default function ImportPage() {
   }
 
   return (
-    <div className="max-w-4xl">
+    <div className="mx-auto max-w-4xl">
       <h1 className="text-2xl font-extrabold text-ink-900">엑셀 대량등록</h1>
       <p className="mt-1 text-sm text-ink-400">
         엑셀(.xlsx) 파일로 상품을 한 번에 등록·수정합니다. 같은 상품코드는 덮어쓰기됩니다.

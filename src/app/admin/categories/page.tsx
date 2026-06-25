@@ -39,7 +39,7 @@ export default function AdminCategoriesPage() {
   }
 
   return (
-    <div className="max-w-4xl">
+    <div className="mx-auto max-w-4xl">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-2xl font-extrabold text-ink-900">카테고리 관리</h1>
